@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預約野陌 · 平日安靜空間</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rust:#9b5234;  --rust-dark:#7a3e26;     /* 磚紅、深磚紅 */
+    --cream:#f5eedc; --parchment:#ede5cc;     /* 米色、羊皮紙色 */
+    --green:#3a5c3b; --green-light:#6a8f6b;   /* 森綠、淺綠 */
+    --ink:#1a1714;   --stone:#c4bfb2;         /* 墨黑、石灰 */
+    --white:#faf8f3;                          /* 暖白 */
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    font-family:'Noto Serif TC',serif;
+    background:var(--white);
+    color:var(--ink);
+    line-height:1.7;
+    /* 細微紙感紋理 */
+    background-image:
+      radial-gradient(var(--stone) 0.5px, transparent 0.5px);
+    background-size:22px 22px;
+    background-position:-11px -11px;
+  }
+
+  .page{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 22px 90px;
+  }
+
+  /* ── 頁首 ── */
+  header{
+    text-align:center;
+    padding:74px 0 42px;
+  }
+  .eyebrow{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.18em;
+    color:var(--rust);
+    margin-bottom:14px;
+  }
+  header h1{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
+    font-size:clamp(2.6rem,9vw,3.8rem);
+    letter-spacing:0.02em;
+    line-height:1.05;
+  }
+  header h1 .zh{
+    display:block;
+    font-family:'Noto Serif TC',serif;
+    font-weight:600;
+    font-size:clamp(1.2rem,4.5vw,1.5rem);
+    letter-spacing:0.5em;
+    margin-top:16px;
+    color:var(--ink);
+    /* 補正 letter-spacing 造成的右偏 */
+    text-indent:0.5em;
+  }
+  .rule{
+    width:46px;height:2px;
+    background:var(--rust);
+    margin:30px auto 0;
+  }
+
+  /* ── 表單卡片 ── */
+  form{
+    background:var(--white);
+    border:1px solid var(--stone);
+    border-radius:4px;
+    box-shadow:0 24px 60px -34px rgba(26,23,20,0.4);
+    overflow:hidden;
+  }
+
+  fieldset{
+    border:none;
+    padding:34px 32px;
+    border-bottom:1px solid var(--stone);
+  }
+  fieldset:last-of-type{border-bottom:none}
+
+  legend, .field-label{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    font-weight:600;
+    font-size:1.08rem;
+    margin-bottom:20px;
+  }
+  .num{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--rust);
+    font-size:1.1rem;
+  }
+  .hint{
+    font-size:0.8rem;
+    color:var(--green);
+    font-weight:400;
+    letter-spacing:0.04em;
+  }
+
+  /* ── 日期選擇 ── */
+  .week-tag{
+    font-size:0.78rem;
+    letter-spacing:0.16em;
+    color:var(--rust);
+    margin:18px 0 10px;
+    font-weight:500;
+  }
+  .week-tag:first-child{margin-top:0}
+  .date-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  .date-chip{
+    cursor:pointer;
+    background:var(--cream);
+    border:1px solid var(--parchment);
+    border-radius:3px;
+    padding:14px 8px;
+    text-align:center;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    user-select:none;
+  }
+  .date-chip:hover{transform:translateY(-2px);border-color:var(--green-light)}
+  .date-chip .d{
+    font-family:'Playfair Display',serif;
+    font-size:1.5rem;
+    font-weight:500;
+    line-height:1;
+  }
+  .date-chip .wd{
+    display:block;
+    font-size:0.82rem;
+    color:var(--rust-dark);
+    margin-top:6px;
+    letter-spacing:0.1em;
+  }
+  .date-chip.sel{
+    background:var(--green);
+    border-color:var(--green);
+    color:var(--cream);
+  }
+  .date-chip.sel .wd{color:var(--green-light)}
+
+  /* ── 電話 ── */
+  input[type="tel"], input[type="time"]{
+    width:100%;
+    font-family:'Noto Serif TC',serif;
+    font-size:1.05rem;
+    color:var(--ink);
+    background:var(--white);
+    border:none;
+    border-bottom:1.5px solid var(--stone);
+    padding:12px 4px;
+    transition:border-color .2s ease;
+  }
+  input[type="tel"]::placeholder{color:var(--stone)}
+  input:focus{outline:none;border-color:var(--rust)}
+  input[type="time"]{border:1px solid var(--stone);border-radius:3px;padding:14px;background:var(--cream)}
+  input[type="time"]:focus{border-color:var(--rust)}
+
+  /* ── 方案 ── */
+  .plans{display:flex;flex-direction:column;gap:12px}
+  .plan{
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:var(--cream);
+    border:1px solid var(--parchment);
+    border-radius:4px;
+    padding:18px 20px;
+    transition:border-color .2s ease, background .2s ease;
+    user-select:none;
+  }
+  .plan:hover{border-color:var(--rust)}
+  .plan .dot{
+    flex:0 0 auto;
+    width:18px;height:18px;
+    border-radius:50%;
+    border:2px solid var(--stone);
+    transition:all .2s ease;
+  }
+  .plan-text{flex:1}
+  .plan-name{font-weight:600;font-size:1.05rem}
+  .plan-name b{color:var(--rust)}
+  .plan-desc{font-size:0.85rem;color:var(--green);margin-top:2px}
+  .plan .price{
+    font-family:'Playfair Display',serif;
+    font-size:1.35rem;
+    font-weight:500;
+    color:var(--rust-dark);
+    white-space:nowrap;
+  }
+  .plan.sel{
+    background:var(--green);
+    border-color:var(--green);
+  }
+  .plan.sel .dot{border-color:var(--cream);background:var(--rust);box-shadow:inset 0 0 0 3px var(--green)}
+  .plan.sel .plan-name,.plan.sel .price{color:var(--cream)}
+  .plan.sel .plan-name b{color:var(--cream)}
+  .plan.sel .plan-desc{color:var(--green-light)}
+
+  /* ── 須知 + 勾選 ── */
+  .terms{
+    background:var(--green);
+    color:var(--cream);
+    border-radius:4px;
+    padding:24px 26px;
+    margin-bottom:20px;
+  }
+  .terms-head{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    letter-spacing:0.08em;
+    color:var(--cream);
+    opacity:0.85;
+    font-size:0.9rem;
+    margin-bottom:14px;
+  }
+  .terms ul{list-style:none}
+  .terms li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:9px;
+    font-size:0.95rem;
+  }
+  .terms li:last-child{margin-bottom:0}
+  .terms li::before{
+    content:"";
+    position:absolute;left:0;top:0.65em;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--rust);
+  }
+  .terms li b{color:var(--white)}
+
+  .agree{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    cursor:pointer;
+    padding:6px 2px;
+    user-select:none;
+  }
+  .agree .box{
+    flex:0 0 auto;
+    width:22px;height:22px;
+    border:1.5px solid var(--stone);
+    border-radius:3px;
+    display:grid;place-items:center;
+    transition:all .2s ease;
+    margin-top:2px;
+  }
+  .agree .box svg{width:13px;height:13px;stroke:var(--cream);stroke-width:3;fill:none;opacity:0;transition:opacity .15s ease}
+  .agree.sel .box{background:var(--rust);border-color:var(--rust)}
+  .agree.sel .box svg{opacity:1}
+  .agree span{font-size:0.98rem;font-weight:500}
+
+  /* ── 送出 ── */
+  .actions{padding:30px 32px 36px}
+  .submit{
+    width:100%;
+    font-family:'Noto Serif TC',serif;
+    font-size:1.12rem;
+    font-weight:600;
+    letter-spacing:0.3em;
+    text-indent:0.3em;
+    color:var(--cream);
+    background:var(--rust);
+    border:none;
+    border-radius:4px;
+    padding:18px;
+    cursor:pointer;
+    transition:background .2s ease, transform .12s ease;
+  }
+  .submit:hover{background:var(--rust-dark)}
+  .submit:active{transform:scale(0.99)}
+  .submit:disabled{background:var(--stone);cursor:not-allowed;color:var(--white)}
+
+  .error{
+    color:var(--rust);
+    font-size:0.86rem;
+    margin-top:12px;
+    text-align:center;
+    min-height:1.2em;
+  }
+
+  /* ── 確認摘要 ── */
+  .confirm{
+    display:none;
+    text-align:center;
+    padding:50px 32px 46px;
+  }
+  .confirm.show{display:block;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .confirm .seal{
+    width:62px;height:62px;border-radius:50%;
+    background:var(--green);
+    display:grid;place-items:center;
+    margin:0 auto 22px;
+  }
+  .confirm .seal svg{width:30px;height:30px;stroke:var(--cream);stroke-width:2.4;fill:none}
+  .confirm h2{
+    font-family:'Playfair Display',serif;
+    font-weight:500;font-size:2rem;
+    margin-bottom:6px;
+  }
+  .confirm .sub{color:var(--green);font-size:0.92rem;margin-bottom:26px;letter-spacing:0.06em}
+  .summary{
+    text-align:left;
+    border:1px solid var(--stone);
+    border-radius:4px;
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+  .summary .row{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:14px 20px;
+    border-bottom:1px solid var(--parchment);
+  }
+  .summary .row:last-child{border-bottom:none;background:var(--cream)}
+  .summary .k{color:var(--rust-dark);font-size:0.9rem;letter-spacing:0.05em}
+  .summary .v{font-weight:600;text-align:right}
+  .summary .v.big{font-family:'Playfair Display',serif;color:var(--rust);font-size:1.15rem}
+  .reset{
+    background:none;border:1px solid var(--stone);
+    font-family:'Noto Serif TC',serif;font-size:0.92rem;color:var(--ink);
+    padding:11px 26px;border-radius:4px;cursor:pointer;
+    transition:border-color .2s ease;
+  }
+  .reset:hover{border-color:var(--rust)}
+
+  footer{
+    text-align:center;
+    padding:38px 0 4px;
+    color:var(--stone);
+    font-size:0.82rem;
+    letter-spacing:0.1em;
+  }
+
+  @media (max-width:480px){
+    fieldset{padding:28px 20px}
+    .actions{padding:26px 20px 32px}
+    .plan{flex-direction:row;flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Reserve a Seat</div>
+    <h1>野陌<span class="zh">安靜空間預約</span></h1>
+    <div class="rule"></div>
+  </header>
+
+  <form id="bookingForm" novalidate>
+
+    <!-- 1 · 預約日期 -->
+    <fieldset>
+      <legend><span class="num">01</span>預約日期<span class="hint">每週三 / 四 / 五</span></legend>
+
+      <div class="week-tag">— 第一週</div>
+      <div class="date-grid">
+        <div class="date-chip" data-date="6/3" data-wd="週三"><span class="d">3</span><span class="wd">週三</span></div>
+        <div class="date-chip" data-date="6/4" data-wd="週四"><span class="d">4</span><span class="wd">週四</span></div>
+        <div class="date-chip" data-date="6/5" data-wd="週五"><span class="d">5</span><span class="wd">週五</span></div>
+      </div>
+
+      <div class="week-tag">— 第二週</div>
+      <div class="date-grid">
+        <div class="date-chip" data-date="6/10" data-wd="週三"><span class="d">10</span><span class="wd">週三</span></div>
+        <div class="date-chip" data-date="6/11" data-wd="週四"><span class="d">11</span><span class="wd">週四</span></div>
+        <div class="date-chip" data-date="6/12" data-wd="週五"><span class="d">12</span><span class="wd">週五</span></div>
+      </div>
+
+      <div class="week-tag">— 第三週</div>
+      <div class="date-grid">
+        <div class="date-chip" data-date="6/17" data-wd="週三"><span class="d">17</span><span class="wd">週三</span></div>
+        <div class="date-chip" data-date="6/18" data-wd="週四"><span class="d">18</span><span class="wd">週四</span></div>
+        <div class="date-chip" data-date="6/19" data-wd="週五"><span class="d">19</span><span class="wd">週五</span></div>
+      </div>
+    </fieldset>
+
+    <!-- 2 · 電話號碼 -->
+    <fieldset>
+      <div class="field-label"><span class="num">02</span>電話號碼</div>
+      <input type="tel" id="phone" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx">
+    </fieldset>
+
+    <!-- 3 · 預約方案 -->
+    <fieldset>
+      <div class="field-label"><span class="num">03</span>預約方案</div>
+      <div class="plans">
+        <div class="plan" data-plan="暫留" data-price="100" data-label="暫留 · 2hr / $100">
+          <span class="dot"></span>
+          <div class="plan-text">
+            <div class="plan-name">暫留 <b>·</b> 2 小時</div>
+            <div class="plan-desc">每兩小時 · 每人</div>
+          </div>
+          <div class="price">$100</div>
+        </div>
+        <div class="plan" data-plan="久待" data-price="180" data-label="久待 · 15:00–23:00 / $180">
+          <span class="dot"></span>
+          <div class="plan-text">
+            <div class="plan-name">久待 <b>·</b> 15:00–23:00</div>
+            <div class="plan-desc">每人 · 贈一杯飲品</div>
+          </div>
+          <div class="price">$180</div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 4 · 預計抵達時間 -->
+    <fieldset>
+      <div class="field-label"><span class="num">04</span>預計抵達時間</div>
+      <input type="time" id="arrival" min="15:00" max="22:00">
+      <p style="margin-top:10px;font-size:0.85rem;color:var(--green);letter-spacing:0.05em">開放入場時間 15:00–22:00，最晚 22:00 入場</p>
+    </fieldset>
+
+    <!-- 5 · 須知與確認 -->
+    <fieldset>
+      <div class="field-label"><span class="num">05</span>預約須知</div>
+      <div class="terms">
+        <div class="terms-head">Before you reserve</div>
+        <ul>
+          <li>平日安靜空間開放 · 每週<b>三／四／五</b></li>
+          <li>暫留｜每兩小時 <b>$100</b>／人</li>
+          <li>久待｜15:00–23:00 <b>$180</b>／人（贈一杯飲品）</li>
+          <li>提供 Wi-Fi、插座、飲水、微波爐，可攜帶外食。</li>
+          <li>適合工作、閱讀、寫作、安靜待著，建議攜帶耳機。</li>
+          <li>最晚入場時間為22:00</li>
+	  <li>到店後付款，可現金或LINEPAY</li>
+        </ul>
+      </div>
+      <label class="agree" id="agree">
+        <span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span>
+        <span>我已閱讀以上內容，並同意完成預約。</span>
+      </label>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit" class="submit" id="submitBtn">完 成 預 約</button>
+      <div class="error" id="error"></div>
+    </div>
+  </form>
+
+  <!-- 確認摘要 -->
+  <div class="confirm" id="confirm">
+    <div class="seal"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></div>
+    <h2>預約完成</h2>
+    <div class="sub">期待與你共度一段安靜的時光</div>
+    <div class="summary" id="summary"></div>
+    <button class="reset" id="resetBtn">再預約一次</button>
+  </div>
+
+ <footer>
+  野陌 · 桃園區新埔三街46號 &nbsp;·&nbsp;
+  <a href="https://yermo2024.github.io/y/3.0" target="_blank" rel="noopener"
+     style="color:var(--stone);text-underline-offset:3px;">官網</a>
+</footer>
+</div>
+
+<script>
+  /* ===== Google 表單設定（把下面換成你自己的） ===== */
+  const GFORM = {
+    // 把 viewform 改成 formResponse 的那串網址
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSeOpSHMLF4hKhU9z_5x68ULdec67O6qSCoNxWrchUhlMNOz0w/formResponse",
+    entry: {
+      date:    "entry.347853053",
+      phone:   "entry.226351556",
+      plan:    "entry.496890516",
+      arrival: "entry.1025644168",
+      agreed:  "entry.842321392"
+    }
+  };
+  /* ============================================== */
+
+  const state = { date:null, wd:null, plan:null, price:null, planLabel:null, agreed:false };
+  const $ = s => document.querySelector(s);
+
+  // 日期單選
+  document.querySelectorAll('.date-chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('.date-chip').forEach(c=>c.classList.remove('sel'));
+      chip.classList.add('sel');
+      state.date = chip.dataset.date;
+      state.wd   = chip.dataset.wd;
+      clearError();
+    });
+  });
+
+  // 方案單選
+  document.querySelectorAll('.plan').forEach(p=>{
+    p.addEventListener('click',()=>{
+      document.querySelectorAll('.plan').forEach(x=>x.classList.remove('sel'));
+      p.classList.add('sel');
+      state.plan = p.dataset.plan;
+      state.price = p.dataset.price;
+      state.planLabel = p.dataset.label;
+      clearError();
+    });
+  });
+
+  // 同意勾選
+  const agree = $('#agree');
+  agree.addEventListener('click',()=>{
+    state.agreed = !state.agreed;
+    agree.classList.toggle('sel', state.agreed);
+    clearError();
+  });
+
+  $('#phone').addEventListener('input', clearError);
+  $('#arrival').addEventListener('input', clearError);
+
+  function clearError(){ $('#error').textContent=''; }
+
+  // 送出
+  $('#bookingForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const err = $('#error');
+    const phone = $('#phone').value.trim();
+    const arrival = $('#arrival').value;
+
+    if(!state.date){ err.textContent='請選擇預約日期'; return; }
+    if(!/^[0-9\s\-]{8,}$/.test(phone)){ err.textContent='請輸入有效的電話號碼'; return; }
+    if(!state.plan){ err.textContent='請選擇預約方案'; return; }
+    if(!arrival){ err.textContent='請選擇預計抵達時間'; return; }
+    if(arrival < '15:00' || arrival > '22:00'){ err.textContent='入場時間為 15:00–22:00，最晚 22:00 入場'; return; }
+    if(!state.agreed){ err.textContent='請勾選並閱讀預約須知'; return; }
+
+    // 組成送往 Google 表單的資料
+    const data = new FormData();
+    if(GFORM.entry.date)    data.append(GFORM.entry.date,    `6/${state.date.split('/')[1]} (${state.wd})`);
+    if(GFORM.entry.phone)   data.append(GFORM.entry.phone,   phone);
+    if(GFORM.entry.plan)    data.append(GFORM.entry.plan,    state.planLabel);
+    if(GFORM.entry.arrival) data.append(GFORM.entry.arrival, arrival);
+    if(GFORM.entry.agreed)  data.append(GFORM.entry.agreed,  '已同意');
+
+    const btn = $('#submitBtn');
+    btn.disabled = true; btn.textContent = '送出中…';
+
+    // no-cors：送得出去但讀不到回應，這是 Google 表單的正常行為
+    fetch(GFORM.action, { method:'POST', mode:'no-cors', body:data })
+      .then(showConfirm)
+      .catch(()=>{ err.textContent='送出失敗，請稍後再試'; btn.disabled=false; btn.textContent='完 成 預 約'; });
+
+    function showConfirm(){
+      $('#summary').innerHTML = `
+        <div class="row"><span class="k">預約日期</span><span class="v">6 月 ${state.date.split('/')[1]} 日 · ${state.wd}</span></div>
+        <div class="row"><span class="k">電話號碼</span><span class="v">${phone}</span></div>
+        <div class="row"><span class="k">預計抵達</span><span class="v">${arrival}</span></div>
+        <div class="row"><span class="k">預約方案</span><span class="v big">${state.planLabel}</span></div>
+      `;
+      $('#bookingForm').style.display='none';
+      $('#confirm').classList.add('show');
+      btn.disabled=false; btn.textContent='完 成 預 約';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+
+  // 重設
+  $('#resetBtn').addEventListener('click',()=>{
+    Object.assign(state,{date:null,wd:null,plan:null,price:null,planLabel:null,agreed:false});
+    document.querySelectorAll('.date-chip,.plan').forEach(x=>x.classList.remove('sel'));
+    agree.classList.remove('sel');
+    $('#phone').value=''; $('#arrival').value='';
+    $('#confirm').classList.remove('show');
+    $('#bookingForm').style.display='';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
