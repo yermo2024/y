@@ -369,7 +369,29 @@ footer{background:var(--ink);color:rgba(245,238,220,.45);padding:3rem 2rem 2rem}
   </div>
 </section>
 
-<!-- MENU -->
+<style>
+  /* ===== SET MENU 套餐樣式 ===== */
+  .set-block { margin-bottom: 3rem; }
+  .set-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--stone); padding-bottom: .7rem; margin-bottom: 1.3rem; }
+  .set-name { font-size: 1.3rem; font-weight: 600; color: var(--green); }
+  .set-name span { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; letter-spacing: .04em; margin-left: .5rem; color: var(--green-light); }
+  .set-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--rust); white-space: nowrap; }
+  .set-group { margin-bottom: 1.1rem; }
+  .set-group:last-child { margin-bottom: 0; }
+  .set-group-label { font-size: .84rem; font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
+  .set-group-label span { font-size: .68rem; color: #aaa; font-weight: 300; margin-left: .4rem; letter-spacing: .1em; }
+  .set-opts { padding-left: 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .set-opts.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem 1.4rem; max-width: 430px; }
+  .set-opt { font-size: .82rem; color: #3a3530; font-weight: 300; line-height: 1.6; }
+  .set-addon { margin-top: .5rem; display: inline-block; border: 1px solid var(--stone); padding: .75rem 1.2rem; font-size: .8rem; line-height: 1.85; color: #3a3530; }
+  .set-addon strong { color: var(--rust); font-weight: 600; }
+  @media(max-width: 768px) {
+    .set-name { font-size: 1.12rem; }
+    .set-price { font-size: 1.2rem; }
+    .set-opts.grid { grid-template-columns: 1fr; }
+  }
+</style>
+
 <section id="menu">
   <div class="container">
     <span class="label reveal">Menu · 菜單</span>
@@ -378,34 +400,139 @@ footer{background:var(--ink);color:rgba(245,238,220,.45);padding:3rem 2rem 2rem}
     <p class="reveal" style="font-size:.82rem;color:#999;margin-bottom:2rem;font-weight:300">※ 本店使用菜黃素是好蛋。</p>
 
     <div class="menu-tabs">
-      <button class="menu-tab active" data-t="brunch">套餐 SET</button>
-      <button class="menu-tab active" data-t="brunch">早午餐 BRUNCH</button>
+      <button class="menu-tab active" data-t="set">套餐 SET</button>
+      <button class="menu-tab" data-t="brunch">早午餐 BRUNCH</button>
       <button class="menu-tab" data-t="sides">輕食 SIDES</button>
       <button class="menu-tab" data-t="pasta">義大利麵 PASTA</button>
       <button class="menu-tab" data-t="dessert">甜點 DESSERT</button>
       <button class="menu-tab" data-t="drinks">飲品 DRINKS</button>
     </div>
 
-    <div class="menu-panel active" id="t-brunch">
+    <div class="menu-panel active" id="t-set">
+      <div class="set-block">
+        <div class="set-head">
+          <div class="set-name">個人套餐 <span>SOLO SET</span></div>
+          <div class="set-price">$580</div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">主餐 <span>三選一</span></div>
+          <div class="set-opts">
+            <div class="set-opt"><span class="spicy">🌶</span>香料辣奶油 · 雞腿肉 · 直麵</div>
+            <div class="set-opt"><span class="spicy">🌶</span>清炒 · 白酒蛤蜊 · 直麵</div>
+            <div class="set-opt">松露奶油 · 野菇 · 燉飯</div>
+          </div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">副餐</div>
+          <div class="set-opts"><div class="set-opt">松露細薯條</div></div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">飲品 <span>四選一</span></div>
+          <div class="set-opts grid">
+            <div class="set-opt">美式咖啡</div>
+            <div class="set-opt">經典拿鐵</div>
+            <div class="set-opt">鹹奶蓋紅茶</div>
+            <div class="set-opt">黑糖鮮奶茶</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="set-block">
+        <div class="set-head">
+          <div class="set-name">雙人套餐 <span>FOR TWO</span></div>
+          <div class="set-price">$1280</div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">主餐 <span>四選二</span></div>
+          <div class="set-opts">
+            <div class="set-opt"><span class="spicy">🌶</span>香料辣奶油 · 雞腿肉 · 直麵</div>
+            <div class="set-opt"><span class="spicy">🌶</span>清炒 · 白酒蛤蜊 · 直麵</div>
+            <div class="set-opt">堅果青醬 · 鴨胸 · 燉飯</div>
+            <div class="set-opt">松露奶油 · 野菇 · 燉飯</div>
+          </div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">副餐</div>
+          <div class="set-opts"><div class="set-opt">松露細薯條</div></div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">甜點</div>
+          <div class="set-opts"><div class="set-opt">大人 · 提拉米蘇</div></div>
+        </div>
+        <div class="set-group">
+          <div class="set-group-label">飲品 <span>四選二</span></div>
+          <div class="set-opts grid">
+            <div class="set-opt">美式咖啡</div>
+            <div class="set-opt">經典拿鐵</div>
+            <div class="set-opt">鹹奶蓋紅茶</div>
+            <div class="set-opt">黑糖鮮奶茶</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="set-addon">可加價 <strong>$30</strong> 換購其他飲品</div>
+    </div>
+
+    <div class="menu-panel" id="t-brunch">
       <div class="menu-cat">
         <div class="menu-cat-title">BRUNCH</div>
         <div class="menu-cat-sub">Nothing urgent, just eggs and sunshine.</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">早餐雙腸 &amp; 野菇炒蛋</div><div class="menu-item-en">Breakfast Sausages &amp; Mushrooms Scramble</div><div class="menu-item-desc">煎培根・早餐腸 &amp; 德腸・野菇炒蛋・奶油生吐司・綜合生菜</div></div><div class="menu-item-price">$350</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">奶油鮮蝦 &amp; 炒時蔬</div><div class="menu-item-en">Creamy Shrimp &amp; Sautéed Veggies</div><div class="menu-item-desc">奶油蝦・炒時蔬・炒蛋・香蒜法棍・綜合生菜</div></div><div class="menu-item-price">$360</div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">香料雞腿排 &amp; 太陽蛋</div><div class="menu-item-en">Spiced Chicken Steak &amp; Sunny Egg</div><div class="menu-item-desc">香料雞腿排・炒時蔬・太陽蛋・細薯條・綜合生菜</div></div><div class="menu-item-price">$350</div></div>          
-   
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">早餐雙腸 &amp; 野菇炒蛋</div>
+              <div class="menu-item-en">Breakfast Sausages &amp; Mushrooms Scramble</div>
+              <div class="menu-item-desc">煎培根・早餐腸 &amp; 德腸・野菇炒蛋・奶油生吐司・綜合生菜</div>
+            </div>
+            <div class="menu-item-price">$350</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">奶油鮮蝦 &amp; 炒時蔬</div>
+              <div class="menu-item-en">Creamy Shrimp &amp; Sautéed Veggies</div>
+              <div class="menu-item-desc">奶油蝦・炒時蔬・炒蛋・香蒜法棍・綜合生菜</div>
+            </div>
+            <div class="menu-item-price">$360</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">香料雞腿排 &amp; 太陽蛋</div>
+              <div class="menu-item-en">Spiced Chicken Steak &amp; Sunny Egg</div>
+              <div class="menu-item-desc">香料雞腿排・炒時蔬・太陽蛋・細薯條・綜合生菜</div>
+            </div>
+            <div class="menu-item-price">$350</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="menu-panel" id="t-sides">
-         <div class="menu-cat">
+      <div class="menu-cat">
         <div class="menu-cat-title">SIDES</div>
         <div class="menu-cat-sub">Small bites. Big crunch.</div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">麵包盤</div><div class="menu-item-en">Bread Platter</div></div><div class="menu-item-price">$280</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">松露細薯條</div><div class="menu-item-en">Truffle Shoestring Fries</div></div><div class="menu-item-price">$220</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name"><span class="spicy">🌶</span>泰式酸辣雞塊</div><div class="menu-item-en">Thai Spicy Chicken Bites</div></div><div class="menu-item-price">$220</div></div>
-         </div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">麵包盤</div>
+              <div class="menu-item-en">Bread Platter</div>
+            </div>
+            <div class="menu-item-price">$280</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">松露細薯條</div>
+              <div class="menu-item-en">Truffle Shoestring Fries</div>
+            </div>
+            <div class="menu-item-price">$220</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name"><span class="spicy">🌶</span>泰式酸辣雞塊</div>
+              <div class="menu-item-en">Thai Spicy Chicken Bites</div>
+            </div>
+            <div class="menu-item-price">$220</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -414,20 +541,68 @@ footer{background:var(--ink);color:rgba(245,238,220,.45);padding:3rem 2rem 2rem}
         <div class="menu-cat-title">PASTA</div>
         <div class="menu-cat-sub">More sauce, less rush.</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name"><span class="spicy">🌶</span>香料辣奶油・雞腿肉・直麵</div><div class="menu-item-en">Spicy Creamy Chicken Fettuccine</div></div><div class="menu-item-price">$340</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">培根・蛋黃・直麵</div><div class="menu-item-en">Fettuccine Carbonara</div></div><div class="menu-item-price">$320</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">水波蛋・蟹棒・奶油明太子・直麵</div><div class="menu-item-en">Poached Egg Cream Mentaiko Crab Stick Fettuccine</div></div><div class="menu-item-price">$340</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name"><span class="spicy">🌶</span>清炒・白酒蛤蜊・直麵</div><div class="menu-item-en">Spaghetti alle Vongole</div></div><div class="menu-item-price">$360</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name"><span class="spicy">🌶</span>堅果青醬・鴨胸・直麵</div><div class="menu-item-en">Nutty Pesto Duck Breast Fettuccine</div></div><div class="menu-item-price">$380</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">松露奶油・野菇・直麵</div><div class="menu-item-en">Truffle Cream Wild Mushroom Fettuccine</div></div><div class="menu-item-price">$330</div></div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name"><span class="spicy">🌶</span>香料辣奶油・雞腿肉・直麵</div>
+              <div class="menu-item-en">Spicy Creamy Chicken Fettuccine</div>
+            </div>
+            <div class="menu-item-price">$340</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">培根・蛋黃・直麵</div>
+              <div class="menu-item-en">Fettuccine Carbonara</div>
+            </div>
+            <div class="menu-item-price">$320</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">水波蛋・蟹棒・奶油明太子・直麵</div>
+              <div class="menu-item-en">Poached Egg Cream Mentaiko Crab Stick Fettuccine</div>
+            </div>
+            <div class="menu-item-price">$340</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name"><span class="spicy">🌶</span>清炒・白酒蛤蜊・直麵</div>
+              <div class="menu-item-en">Spaghetti alle Vongole</div>
+            </div>
+            <div class="menu-item-price">$360</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name"><span class="spicy">🌶</span>堅果青醬・鴨胸・直麵</div>
+              <div class="menu-item-en">Nutty Pesto Duck Breast Fettuccine</div>
+            </div>
+            <div class="menu-item-price">$380</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">松露奶油・野菇・直麵</div>
+              <div class="menu-item-en">Truffle Cream Wild Mushroom Fettuccine</div>
+            </div>
+            <div class="menu-item-price">$330</div>
+          </div>
         </div>
       </div>
       <div class="menu-cat">
         <div class="menu-cat-title">RISOTTO</div>
         <div class="menu-cat-sub">When the world rushes, risotto stays.</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">堅果青醬・鴨胸・燉飯</div><div class="menu-item-en">Nutty Pesto Duck Breast Risotto</div></div><div class="menu-item-price">$360</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">松露奶油・野菇・燉飯</div><div class="menu-item-en">Truffle Cream Wild Mushroom Risotto</div></div><div class="menu-item-price">$360</div></div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">堅果青醬・鴨胸・燉飯</div>
+              <div class="menu-item-en">Nutty Pesto Duck Breast Risotto</div>
+            </div>
+            <div class="menu-item-price">$360</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">松露奶油・野菇・燉飯</div>
+              <div class="menu-item-en">Truffle Cream Wild Mushroom Risotto</div>
+            </div>
+            <div class="menu-item-price">$360</div>
+          </div>
         </div>
       </div>
     </div>
@@ -437,10 +612,28 @@ footer{background:var(--ink);color:rgba(245,238,220,.45);padding:3rem 2rem 2rem}
         <div class="menu-cat-title">DESSERT</div>
         <div class="menu-cat-sub">No reason. Just dessert. ——「甜點，是另一個胃的事。」</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">大人　提拉米蘇</div><div class="menu-item-en">Boozy Tiramisu</div></div><div class="menu-item-price">$200</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">法式吐司　香草冰淇淋</div><div class="menu-item-en">French Toast with Vanilla Ice Cream</div></div><div class="menu-item-price">$240</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">苦甜焦糖　烤布丁</div><div class="menu-item-en">Bittersweet Caramel Flan</div></div><div class="menu-item-price">$180</div></div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">大人 提拉米蘇</div>
+              <div class="menu-item-en">Boozy Tiramisu</div>
+            </div>
+            <div class="menu-item-price">$200</div>
           </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">法式吐司 香草冰淇淋</div>
+              <div class="menu-item-en">French Toast with Vanilla Ice Cream</div>
+            </div>
+            <div class="menu-item-price">$240</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">苦甜焦糖 烤布丁</div>
+              <div class="menu-item-en">Bittersweet Caramel Flan</div>
+            </div>
+            <div class="menu-item-price">$180</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -449,39 +642,164 @@ footer{background:var(--ink);color:rgba(245,238,220,.45);padding:3rem 2rem 2rem}
         <div class="menu-cat-title">COFFEE</div>
         <div class="menu-cat-sub">Coffee hugged me today. ｜ 中焙・杏仁果、榛果巧克力、黑糖、脆梅，風味清爽甘甜</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">美式咖啡</div><div class="menu-item-en">Americano</div></div><div class="menu-item-price">$120</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">通寧美式</div><div class="menu-item-en">Tonic Americano</div></div><div class="menu-item-price">$160</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">青森蘋果美式</div><div class="menu-item-en">Aomori Apple Americano</div></div><div class="menu-item-price">$170</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">經典拿鐵</div><div class="menu-item-en">Caffè Latte</div></div><div class="menu-item-price">$160</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">海鹽焦糖拿鐵</div><div class="menu-item-en">Sea Salt Caramel Latte</div></div><div class="menu-item-price">$180</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">烤黑糖拿鐵</div><div class="menu-item-en">Brown Sugar Latte</div></div><div class="menu-item-price">$180</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">青梅氣泡冰咖啡</div><div class="menu-item-en">Iced Sparkling Coffee with Green Plum</div></div><div class="menu-item-price">$170</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">西西里冰咖啡</div><div class="menu-item-en">Iced Lemon Espresso</div></div><div class="menu-item-price">$170</div></div>
-                    </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">美式咖啡</div>
+              <div class="menu-item-en">Americano</div>
+            </div>
+            <div class="menu-item-price">$120</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">通寧美式</div>
+              <div class="menu-item-en">Tonic Americano</div>
+            </div>
+            <div class="menu-item-price">$160</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">青森蘋果美式</div>
+              <div class="menu-item-en">Aomori Apple Americano</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">經典拿鐵</div>
+              <div class="menu-item-en">Caffè Latte</div>
+            </div>
+            <div class="menu-item-price">$160</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">海鹽焦糖拿鐵</div>
+              <div class="menu-item-en">Sea Salt Caramel Latte</div>
+            </div>
+            <div class="menu-item-price">$180</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">烤黑糖拿鐵</div>
+              <div class="menu-item-en">Brown Sugar Latte</div>
+            </div>
+            <div class="menu-item-price">$180</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">青梅氣泡冰咖啡</div>
+              <div class="menu-item-en">Iced Sparkling Coffee with Green Plum</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">西西里冰咖啡</div>
+              <div class="menu-item-en">Iced Lemon Espresso</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+        </div>
       </div>
+      
       <div class="menu-cat">
         <div class="menu-cat-title">SOFT DRINK</div>
         <div class="menu-cat-sub">Nothing strong. Just lovely.</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">伯爵茶</div><div class="menu-item-en">Earl Grey Tea</div></div><div class="menu-item-price">$140</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">鹹奶蓋紅茶</div><div class="menu-item-en">Salted Cream Black Tea</div></div><div class="menu-item-price">$160</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">伯爵鮮奶茶</div><div class="menu-item-en">Earl Grey Milk Tea</div></div><div class="menu-item-price">$150</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">黑糖鮮奶茶</div><div class="menu-item-en">Brown Sugar Milk Tea</div></div><div class="menu-item-price">$150</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">可可牛奶</div><div class="menu-item-en">Cocoa Milk</div></div><div class="menu-item-price">$180</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">焙茶牛奶</div><div class="menu-item-en">Hōjicha Latte</div></div><div class="menu-item-price">$180</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">鳳梨百香冰茶</div><div class="menu-item-en">Pineapple Passion Fruit Iced Tea</div></div><div class="menu-item-price">$160</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">柚子冰茶</div><div class="menu-item-en">Yuzu Iced Tea</div></div><div class="menu-item-price">$160</div></div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">伯爵茶</div>
+              <div class="menu-item-en">Earl Grey Tea</div>
+            </div>
+            <div class="menu-item-price">$140</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">鹹奶蓋紅茶</div>
+              <div class="menu-item-en">Salted Cream Black Tea</div>
+            </div>
+            <div class="menu-item-price">$160</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">伯爵鮮奶茶</div>
+              <div class="menu-item-en">Earl Grey Milk Tea</div>
+            </div>
+            <div class="menu-item-price">$150</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">黑糖鮮奶茶</div>
+              <div class="menu-item-en">Brown Sugar Milk Tea</div>
+            </div>
+            <div class="menu-item-price">$150</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">可可牛奶</div>
+              <div class="menu-item-en">Cocoa Milk</div>
+            </div>
+            <div class="menu-item-price">$180</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">焙茶牛奶</div>
+              <div class="menu-item-en">Hōjicha Latte</div>
+            </div>
+            <div class="menu-item-price">$180</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">鳳梨百香冰茶</div>
+              <div class="menu-item-en">Pineapple Passion Fruit Iced Tea</div>
+            </div>
+            <div class="menu-item-price">$160</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">柚子冰茶</div>
+              <div class="menu-item-en">Yuzu Iced Tea</div>
+            </div>
+            <div class="menu-item-price">$160</div>
+          </div>
         </div>
-              <div class="menu-cat">
+      </div>
+
+      <div class="menu-cat">
         <div class="menu-cat-title">SPARKLING</div>
         <div class="menu-cat-sub">Let the fizz lift you.</div>
         <div class="menu-items">
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">青森蘋果氣泡</div><div class="menu-item-en">Aomori Apple Sparkler</div></div><div class="menu-item-price">$170</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">柚子氣泡</div><div class="menu-item-en">Yuzu Sparkler</div></div><div class="menu-item-price">$170</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">青梅鼠尾草氣泡</div><div class="menu-item-en">Green Plum Drink Sparkler</div></div><div class="menu-item-price">$170</div></div>
-          <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">鳳梨百香氣泡</div><div class="menu-item-en">Pineapple Passionfruit Sparkler</div></div><div class="menu-item-price">$170</div></div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">青森蘋果氣泡</div>
+              <div class="menu-item-en">Aomori Apple Sparkler</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">柚子氣泡</div>
+              <div class="menu-item-en">Yuzu Sparkler</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">青梅鼠尾草氣泡</div>
+              <div class="menu-item-en">Green Plum Drink Sparkler</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">鳳梨百香氣泡</div>
+              <div class="menu-item-en">Pineapple Passionfruit Sparkler</div>
+            </div>
+            <div class="menu-item-price">$170</div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
